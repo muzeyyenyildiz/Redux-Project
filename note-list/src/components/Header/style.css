@@ -1,0 +1,16 @@
+.header {
+  margin: 50px;
+}
+
+h1 {
+  color: #808080;
+}
+
+.search-input {
+  width: 250px;
+  height: 40px;
+  font-size: 18px;
+  padding: 0 18px;
+  border: 1px solid #808080;
+  border-radius: 20px;
+}

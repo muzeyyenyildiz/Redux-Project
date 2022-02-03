@@ -1,0 +1,26 @@
+.card {
+  width: 150px;
+  height: 250px;
+  border-radius: 10px;
+  margin: 15px;
+  text-align: start;
+  padding: 20px;
+}
+.card p {
+  margin: 0;
+}
+.pembe {
+  background-color: #f06292;
+}
+.mor {
+  background-color: #ba68c8;
+}
+.sari {
+  background-color: #ffd54f;
+}
+.mavi {
+  background-color: #4fc3f7;
+}
+.yesil {
+  background-color: #aed581;
+}
