@@ -7,5 +7,5 @@
 - Google Fonts
 
 
-### GET - Get all wines 
+### NotesApp Page
 ![plot](img/ekran.JPG)
