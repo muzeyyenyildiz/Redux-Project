@@ -1,28 +1,47 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-export const fetchCharacters = createAsyncThunk('characters/getCharacters', async ()=>{
-  const res = await axios(`${process.env.REACT_APP_API_BASE_ENDPOINT}characters?limit=10`)
-  return res.data
-});
+const char_limit =12 ;
 
+export const fetchCharacters = createAsyncThunk(
+  "characters/getCharacters",
+  async (page) => {
+    const res = await axios(
+      `${process.env.REACT_APP_API_BASE_ENDPOINT}characters?limit=${char_limit}&offset=${page ? page * char_limit : 0}`
+    );
+    return res.data;
+  }
+);
 
 export const charactersSlice = createSlice({
-  name: 'characters',
+  name: "characters",
   initialState: {
-    items:[]
+    items: [],
+    status: "idle",
+    page:0,
+    hasNextPage:true
   },
   reducers: {},
-  extraReducers:{
-    [fetchCharacters.fulfilled]: (state,action) =>{
-      console.log(action.payload)
-    }
-  }
-   
-  
-})
+  extraReducers: {
+    [fetchCharacters.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [fetchCharacters.fulfilled]: (state, action) => {
+      state.items = [...state.items ,...action.payload];
+      state.status= "successed";
+      state.page += 1;
+      if(action.payload.length < 12 ){
+        state.hasNextPage=false;
+      }
+    },
+    [fetchCharacters.rejected]: (state, action) => {
+      state.status= "failed";
+      state.error = action.error.message
+    },
+  },
+});
 
-// Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = charactersSlice.actions
+export const { a } =
+  charactersSlice.actions;
 
-export default charactersSlice.reducer
+export default charactersSlice.reducer;
