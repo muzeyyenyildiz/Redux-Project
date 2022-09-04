@@ -16,14 +16,14 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCharacters());
-  }, [dispatch]);
+    if (status === "idle") dispatch(fetchCharacters());
+  }, [dispatch, status]);
 
-  if (status==="failed") {
+  if (status === "failed") {
     return <Error error={error} />;
   }
   return (
-    <div>
+    <div className="container">
       <Masonry
         breakpointCols={4}
         className="my-masonry-grid"
@@ -33,8 +33,8 @@ const Home = () => {
           <CharacterCard item={item} />
         ))}
       </Masonry>
-      {status==="loading" && <Loading />}
-      {hasNextPage && !status !== "loading" && (
+      {status === "loading" && <Loading />}
+      {hasNextPage && status !== "loading" && (
         <button
           onClick={() => dispatch(fetchCharacters(nextPage))}
           className="load_button"

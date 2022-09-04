@@ -1,0 +1,15 @@
+
+.container-it{
+    margin: 20px;
+}
+
+.item-container{
+    margin: 20px 0;
+    padding: 5px;
+}
+.item-container q{
+    padding: 10px;
+}
+.quotesInfo{
+ text-align: center;
+}
